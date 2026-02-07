@@ -2,7 +2,7 @@
 
 ### A Methodology for Decomposing Complex Ideas Into AI-Workable Units
 
-**Version 1.0**
+**Version 0.1**
 
 ---
 
