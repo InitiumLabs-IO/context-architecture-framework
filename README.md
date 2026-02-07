@@ -164,6 +164,15 @@ The framework defines seven document types, each with a specific role, hard size
 - **Rationale:** Why this decision was made and what alternatives were considered, in one to two sentences.
 - **Affected Workstreams:** Which workstreams are impacted by this decision.
 
+**Entry Format:** Use a flat list format per entry, not a table. Tables are difficult to read and maintain in raw Markdown when entries are being added frequently. Order fields so that short metadata fields come first and long content fields come last — this keeps metadata visible when scanning entries, rather than burying it after a lengthy block of text. Each entry should look like:
+
+```
+### D-001
+- **Affected Workstreams:** Platform Architecture, Data Model
+- **Decision:** Use PostgreSQL as the primary database.
+- **Rationale:** Relational model fits our data structure; considered MongoDB but rejected due to lack of transaction support.
+```
+
 **Archival Rule:** When the Decision Log exceeds 2 pages, archive older decisions into a separate Decision Archive file. Retain only recent and currently active decisions in the main log. The archive can be loaded on demand for historical context but should not be part of the standard session load.
 
 ---
@@ -184,6 +193,16 @@ The framework defines seven document types, each with a specific role, hard size
 - **Workstream:** Which workstream this question belongs to.
 - **Priority:** Now (blocking current work), Next (needed soon), or Later (important but not urgent).
 
+**Entry Format:** Use a flat list format per entry, not a table. Tables are difficult to read and maintain in raw Markdown when entries are being added frequently. Order fields so that short metadata fields come first and the question itself comes last — this keeps metadata like priority and workstream visible when scanning entries, rather than burying them after a lengthy question. Each entry should look like:
+
+```
+### Q-001
+- **Added:** 2026-02-07
+- **Workstream:** Platform Architecture
+- **Priority:** Now
+- **Question:** What authentication provider should we use?
+```
+
 **Triage Discipline:** During the weekly reconciliation session, review all entries. Promote resolved questions into the Decision Log if a decision was made. Remove questions that are no longer relevant. Reassign priorities as the project evolves. Use the Added date to identify stale entries — a question marked "Now" that has been open for several weeks may indicate a blocked decision or a priority that needs escalation.
 
 ---
@@ -200,6 +219,13 @@ The framework defines seven document types, each with a specific role, hard size
 
 - **Date:** The date of capture, in YYYY-MM-DD format, prefixed to the entry (e.g., `2026-02-07: Maybe the onboarding flow should support SSO`).
 - **Content:** The idea, observation, or thought in one to two sentences. Capture only — no elaboration.
+
+**Entry Format:** Use a simple date-prefixed line per entry, not a table. The Inbox is optimized for speed of capture — any formatting beyond a date and a sentence adds friction that causes ideas to be lost. Each entry should look like:
+
+```
+2026-02-07: Maybe the onboarding flow should support SSO
+2026-02-08: Look into whether Stripe supports our pricing model
+```
 
 **Triage Discipline:** During the weekly reconciliation session, review all inbox entries. For each entry, take one of three actions: promote to the Question Queue of a specific workstream if it is an open question about an existing project; create a new Anchor Doc if the idea deserves its own project; or discard if the thought no longer seems valuable.
 
