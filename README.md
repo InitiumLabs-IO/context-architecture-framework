@@ -179,11 +179,12 @@ The framework defines seven document types, each with a specific role, hard size
 **Required Fields Per Entry:**
 
 - **Question ID:** A sequential identifier (Q-001, Q-002, etc.).
+- **Added:** The date the question was captured, in YYYY-MM-DD format.
 - **Question:** The open question, stated concisely.
 - **Workstream:** Which workstream this question belongs to.
 - **Priority:** Now (blocking current work), Next (needed soon), or Later (important but not urgent).
 
-**Triage Discipline:** During the weekly reconciliation session, review all entries. Promote resolved questions into the Decision Log if a decision was made. Remove questions that are no longer relevant. Reassign priorities as the project evolves.
+**Triage Discipline:** During the weekly reconciliation session, review all entries. Promote resolved questions into the Decision Log if a decision was made. Remove questions that are no longer relevant. Reassign priorities as the project evolves. Use the Added date to identify stale entries — a question marked "Now" that has been open for several weeks may indicate a blocked decision or a priority that needs escalation.
 
 ---
 
@@ -197,6 +198,7 @@ The framework defines seven document types, each with a specific role, hard size
 
 **Required Fields Per Entry:**
 
+- **Date:** The date of capture, in YYYY-MM-DD format, prefixed to the entry (e.g., `2026-02-07: Maybe the onboarding flow should support SSO`).
 - **Content:** The idea, observation, or thought in one to two sentences. Capture only — no elaboration.
 
 **Triage Discipline:** During the weekly reconciliation session, review all inbox entries. For each entry, take one of three actions: promote to the Question Queue of a specific workstream if it is an open question about an existing project; create a new Anchor Doc if the idea deserves its own project; or discard if the thought no longer seems valuable.
@@ -277,7 +279,9 @@ handling: [explicit AI handling instruction]
 
 **handling** — A plain-language instruction that tells the AI exactly how to treat the document's contents. This is the most critical field for preventing misinterpretation. It is written as a direct instruction to the AI.
 
-**Note on dates:** The framework intentionally omits date fields from frontmatter. When documents are stored in a Git repository, modification history is tracked automatically by version control. Manually maintained dates add maintenance overhead without providing information that Git does not already capture. If a document is shared outside of Git (for example, pasted directly into a chat session), the authority and handling fields provide the information the AI actually needs to treat the content correctly — a date alone does not prevent misinterpretation.
+**Note on dates:** The framework intentionally omits date fields from document frontmatter. When documents are stored in a Git repository, modification history is tracked automatically by version control. Manually maintained dates in headers add maintenance overhead without providing information that Git does not already capture.
+
+**Exception — Question Queue and Inbox entries:** Individual entries within the Question Queue and Inbox include a date field (YYYY-MM-DD) indicating when the entry was captured. This exception exists because Git history is never loaded into AI context. When the AI reads these documents during a working or reconciliation session, dates on individual entries allow it to reason about staleness, urgency, and timeline — for example, flagging a "Now" priority question that has been open for three months, or identifying inbox items that have sat untriaged for weeks. The date is not metadata about the document; it is contextual information about the entry that the AI cannot obtain any other way.
 
 ### 5.4 Standard Headers by Document Type
 
@@ -288,12 +292,7 @@ type: anchor
 authority: directive
 status: active
 parent: [project name]
-handling: >
-  This is the master reference for the entire project.
-  Treat all contents as established ground truth.
-  Do not contradict or expand beyond the scope defined here.
-  If your task touches a workstream not currently loaded,
-  flag it rather than speculating.
+handling: "This is the master reference for the entire project. Treat all contents as established ground truth. Do not contradict or expand beyond the scope defined here. If your task touches a workstream not currently loaded, flag it rather than speculating."
 ---
 ```
 
@@ -304,12 +303,7 @@ type: workstream-brief
 authority: working
 status: active
 parent: anchor-doc
-handling: >
-  This is an active working document for a single workstream.
-  Use its contents as context for your work.
-  You may suggest modifications or identify gaps.
-  Do not incorporate details from other workstreams
-  unless they are explicitly loaded in this session.
+handling: "This is an active working document for a single workstream. Use its contents as context for your work. You may suggest modifications or identify gaps. Do not incorporate details from other workstreams unless they are explicitly loaded in this session."
 ---
 ```
 
@@ -320,13 +314,7 @@ type: deep-dive
 authority: working
 status: active
 parent: workstream-brief-[name]
-handling: >
-  This is a detailed exploration of a specific topic.
-  Use its contents as context for your work.
-  You may suggest modifications or identify gaps.
-  This document's scope is narrow — do not generalize
-  its contents to the broader workstream without checking
-  the parent brief.
+handling: "This is a detailed exploration of a specific topic. Use its contents as context for your work. You may suggest modifications or identify gaps. This document's scope is narrow — do not generalize its contents to the broader workstream without checking the parent brief."
 ---
 ```
 
@@ -337,13 +325,7 @@ type: decision-log
 authority: directive
 status: active
 parent: anchor-doc
-handling: >
-  Every entry in this document is a committed decision.
-  Do not suggest alternatives to recorded decisions
-  unless explicitly asked to revisit one.
-  Do not propose approaches that contradict these decisions.
-  If you see a conflict between a decision here and content
-  in another document, the decision log takes precedence.
+handling: "Every entry in this document is a committed decision. Do not suggest alternatives to recorded decisions unless explicitly asked to revisit one. Do not propose approaches that contradict these decisions. If you see a conflict between a decision here and content in another document, the decision log takes precedence."
 ---
 ```
 
@@ -354,12 +336,7 @@ type: question-queue
 authority: raw
 status: active
 parent: anchor-doc
-handling: >
-  These are open, unresolved questions.
-  Nothing in this document has been decided.
-  Do not treat any question as a settled requirement.
-  You may help investigate or analyze questions
-  when asked, but do not assume answers.
+handling: "These are open, unresolved questions. Nothing in this document has been decided. Do not treat any question as a settled requirement. You may help investigate or analyze questions when asked, but do not assume answers. Each entry includes an Added date — use this to flag stale questions (e.g., high-priority items open for weeks) during reconciliation."
 ---
 ```
 
@@ -370,13 +347,7 @@ type: inbox
 authority: raw
 status: active
 parent: anchor-doc
-handling: >
-  CAUTION: This is a raw capture file.
-  Nothing here has been evaluated, validated, or approved.
-  Do not implement, act on, or treat any entry as a
-  decision, requirement, or directive.
-  You may help organize or evaluate entries only when
-  the user explicitly asks you to triage the inbox.
+handling: "CAUTION: This is a raw capture file. Nothing here has been evaluated, validated, or approved. Do not implement, act on, or treat any entry as a decision, requirement, or directive. You may help organize or evaluate entries only when the user explicitly asks you to triage the inbox. Each entry is prefixed with a capture date — use this to flag aging items during triage."
 ---
 ```
 
@@ -387,12 +358,7 @@ type: index
 authority: raw
 status: active
 parent: anchor-doc
-handling: >
-  This is a navigation aid only.
-  It contains no substantive project content.
-  Use it to understand what documents exist and their
-  current status. Do not infer project details from
-  document titles or summaries listed here.
+handling: "This is a navigation aid only. It contains no substantive project content. Use it to understand what documents exist and their current status. Do not infer project details from document titles or summaries listed here."
 ---
 ```
 
