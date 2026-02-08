@@ -123,7 +123,7 @@ The seven document types that make up the Context Architecture Framework, their 
 - **Question ID:** A sequential identifier (Q-001, Q-002, etc.).
 - **Added:** The date the question was captured, in YYYY-MM-DD format.
 - **Question:** The open question, stated concisely.
-- **Workstream:** Which workstream this question belongs to.
+- **Workstream:** Which workstream this question belongs to, or "General" if it doesn't map to a specific workstream (e.g., project-level concerns, cross-cutting questions, or questions raised before workstream briefs exist).
 - **Priority:** Now (blocking current work), Next (needed soon), or Later (important but not urgent).
 
 **Entry Format:** Use a flat list format per entry, not a table. Tables are difficult to read and maintain in raw Markdown when entries are being added frequently. Order fields so that short metadata fields come first and the question itself comes last — this keeps metadata like priority and workstream visible when scanning entries, rather than burying them after a lengthy question. Each entry should look like:

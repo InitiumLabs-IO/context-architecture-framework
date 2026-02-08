@@ -194,7 +194,9 @@ Check for:
 - **Load:** Inbox (reviewed manually, not loaded into AI context)
 - **Modifies:** Inbox — remove triaged entries
 - **Modifies:** Question Queue — append promoted entries
-- **Transformation:** Inbox entries → Question Queue entries (if the item is an open question for an existing workstream), new Anchor Doc (if the item deserves its own project), or discarded (if no longer valuable)
+- **Transformation:** Inbox entries → Question Queue entries (if promoted), new Anchor Doc (if the item deserves its own project), kept (if not yet ready to act on), or discarded
+
+Inbox entries are raw and unvetted. The user must decide what to do with each entry — the AI should present entries one at a time and ask, not make assumptions about intent, relevance, or destination.
 
 ---
 

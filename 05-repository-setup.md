@@ -62,6 +62,12 @@ For full details on authority levels and how they map to document types, see [Co
 - **Ask first:** Before modifying any document with `authority: directive`. Before acting on any content from a document with `authority: raw`.
 - **Never do:** Treat inbox entries as requirements or decisions. Combine content from multiple workstreams without explicit instruction. Speculate about content in documents you have not been given.
 
+**Document Operations.** Step-by-step procedures for every common operation: adding a decision, adding a question, resolving a question, capturing an inbox idea, triaging the inbox, updating a brief, creating a deep dive, splitting an oversized document, and running reconciliation. The AI should recognize when an operation applies from context and execute it proactively — the user should not have to name the operation or manage file formats.
+
+**Context Loading Procedure.** Explicit instructions for how the AI should determine what to load. The AI should always start with `anchor.md`, identify the relevant workstream from the user's request, load the corresponding brief and decision log, and only pull in deep dives or the index when needed.
+
+A complete example AGENTS.md with all of these sections is provided in [example.AGENTS.md](example.AGENTS.md).
+
 ---
 
 ## Tool Compatibility
