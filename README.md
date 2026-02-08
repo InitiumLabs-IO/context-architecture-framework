@@ -27,57 +27,23 @@ The Context Architecture Framework is a structured methodology for breaking down
 | Context Loading    | Load the minimum documents needed for the current task                     | [Workflow](04-workflow.md)                 |
 | AGENTS.md          | Repository-root file that teaches AI tools the framework's rules           | [Repository Setup](05-repository-setup.md) |
 | Size Limits        | Non-negotiable token budgets derived from how attention mechanisms work    | [Reference](06-reference.md)               |
+| Workflows          | Step-by-step scenarios showing what gets created, modified, and transformed | [Workflows](07-workflows.md)               |
 
 ---
 
 ## Example Workflows
 
-### I have a new idea and want to structure it from scratch
+| Scenario                              | What Gets Created or Modified                                                  | Start Here                                     |
+| ------------------------------------- | ------------------------------------------------------------------------------ | ---------------------------------------------- |
+| Structuring a new idea from scratch   | Raw material → Anchor Doc → Workstream Briefs; creates all supporting docs     | [Workflows](07-workflows.md#structuring-a-new-idea-from-scratch) |
+| Adopting the framework for an existing project | Existing knowledge → Anchor Doc + Briefs; backfills Decision Log       | [Workflows](07-workflows.md#adopting-the-framework-for-an-existing-project) |
+| Working on a specific workstream      | Modifies Workstream Brief, Decision Log, Question Queue                        | [Workflows](07-workflows.md#working-on-a-specific-workstream) |
+| Deepening a topic with a Deep Dive    | Brief reference → Deep Dive Doc; updates parent brief with cross-reference     | [Workflows](07-workflows.md#deepening-a-topic-with-a-deep-dive) |
+| Setting up repository AI config       | Creates AGENTS.md; adds contract headers to all documents                      | [Workflows](07-workflows.md#setting-up-repository-ai-configuration) |
+| Reconciling out-of-sync documents     | Updates Anchor Doc, Index, Question Queue, Decision Log; triages Inbox         | [Workflows](07-workflows.md#reconciling-out-of-sync-documents) |
+| Understanding the theory              | Nothing modified — reading only                                                | [Workflows](07-workflows.md#understanding-the-theory) |
 
-1. Gather your raw material — notes, transcripts, scattered thoughts
-2. Follow **Phase 1: Capture** and **Phase 2: Decompose** to create your Anchor Doc and identify 3–7 workstreams
-3. Follow **Phase 3: Elaborate** to build a Workstream Brief for each workstream in separate AI sessions
-4. Create your Decision Log, Question Queue, Inbox, and Index files with proper [contract headers](03-contract-headers.md)
-
-Start with [Workflow](04-workflow.md) for the full six-phase process, and [Document Types](02-document-types.md) for what goes in each document.
-
-### I have an existing project and want to adopt this framework
-
-1. Write an Anchor Doc (500 words max) that distills your project's problem, solution, and workstream structure
-2. Identify your natural workstreams — areas of the project that can be worked on independently
-3. Create a Workstream Brief for each one, being strict about [MECE boundaries](01-foundations.md)
-4. Set up your repository with [AGENTS.md](05-repository-setup.md) so AI tools understand the structure
-5. Add [contract headers](03-contract-headers.md) to every document
-
-Start with [Document Types](02-document-types.md) for document specs and [Repository Setup](05-repository-setup.md) for file layout.
-
-### I need to work on a specific workstream with my AI
-
-1. Load three documents: Anchor Doc + the relevant Workstream Brief + Decision Log (~6,000 tokens total)
-2. Work on the specific task in a focused session
-3. At session end, capture any new decisions in the Decision Log, new questions in the Question Queue, and update the Brief if needed
-
-See [Workflow](04-workflow.md) for loading patterns and the full loading quick reference table.
-
-### I need to set up my repo so AI tools understand my project
-
-1. Place an `AGENTS.md` file at the repository root with document hierarchy, authority levels, and handling boundaries
-2. Add YAML frontmatter contract headers to every document
-3. For tools that don't read AGENTS.md (e.g., Claude Code), add a `CLAUDE.md` redirect
-
-See [Repository Setup](05-repository-setup.md) for the full AGENTS.md specification and file layout, and [Contract Headers](03-contract-headers.md) for the header format.
-
-### My documents feel out of sync and need reconciliation
-
-1. Load the Anchor Doc, the Index, and the Question Queue
-2. Follow **Phase 6: Reconcile** — check for scope drift, stale questions, missing coverage, and untriaged inbox items
-3. Update documents as needed; archive old Decision Log entries if it exceeds 2 pages
-
-See [Workflow](04-workflow.md) for the reconciliation process and [Reference](06-reference.md) for anti-patterns that cause drift.
-
-### I want to understand the theory behind this approach
-
-Read [Foundations](01-foundations.md) for the theoretical basis: context engineering, MECE decomposition, progressive elaboration, architecture decision records, and why bigger context windows produce worse results.
+See [Workflows](07-workflows.md) for step-by-step detail on each scenario, including what documents are created, modified, and how entities transform at each step.
 
 ---
 
